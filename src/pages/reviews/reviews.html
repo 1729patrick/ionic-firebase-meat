@@ -1,0 +1,29 @@
+<ion-header>
+
+    <ion-navbar color="danger">
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-list>
+        <ion-item *ngFor="let review of reviews; let i = index" (click)="showReview(i)"><!--para pegar a posicao do comentario no array-->
+            <ion-avatar item-start>
+                <img *ngIf="review?.rating  >= 4.5" src="assets/imgs/reactions/loved.png">
+                <img *ngIf="review?.rating  < 4.5 && review?.rating > 2.5" src="assets/imgs/reactions/soso.png">
+                <img *ngIf="review?.rating  <= 2.5" src="assets/imgs/reactions/pissed.png">
+            </ion-avatar>
+
+            <h3>Nota: {{ review?.rating }}</h3>
+            <h3 class="justify">Comentário: {{ review?.comments }}</h3>
+            <p>Nome: {{ review?.name }}</p>
+            <button ion-button clear item-end >Ver Mais</button>
+        </ion-item>
+    </ion-list>
+    <ion-fab right bottom>
+        <button ion-fab color="danger" (click)="newReview()"><ion-icon name="ios-add-outline"></ion-icon></button>
+    </ion-fab>
+
+</ion-content>

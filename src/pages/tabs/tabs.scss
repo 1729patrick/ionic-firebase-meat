@@ -1,0 +1,12 @@
+page-tabs {
+    .tabbar {
+
+        a.tab-button[aria-selected=true] {
+            color: #cc0000;
+            .tab-button-icon {
+                color: #cc0000;
+            }
+        }
+    }
+
+}

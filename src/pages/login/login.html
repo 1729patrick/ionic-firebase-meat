@@ -1,0 +1,36 @@
+<ion-header>
+
+    <ion-navbar color="danger">
+        <ion-title>Login</ion-title>
+
+        <ion-buttons end>
+            <button ion-button icon-only end (click)="pushHome()">
+                <ion-icon name="ios-home-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <form [formGroup] = "loginForm">
+        <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+            <!-- <ion-input [type]="passwordType" formControlName="password"></ion-input>
+            <ion-icon [name]="passwordIcon" item-right (click)="hideShowPassword()"></ion-icon> -->
+        </ion-item>
+    </form>
+
+    <div class="margin-top">
+        <button ion-button color="danger" block outline (click)="login()">Login</button>
+        <br><button ion-button color="danger" block outline (click)="pushSignUp()">Create Account</button>
+    </div>
+
+</ion-content>

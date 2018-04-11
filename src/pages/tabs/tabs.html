@@ -1,0 +1,19 @@
+<ion-header>
+
+    <ion-navbar color="danger">
+        <ion-title text-center> {{ restaurantName }} </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="pushCart()">
+                <ion-icon name="ios-cart-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-tabs  selectedIndex="1" color="light">
+    <ion-tab [root]="menuRoot" [rootParams]="restaurantParams" tabTitle="Menu" tabIcon="ios-cart"(ionSelect)="danger"></ion-tab>
+    <ion-tab [root]="restaurantRoot" [rootParams]="restaurantParams" tabTitle="Restaurante" tabIcon="ios-restaurant"></ion-tab>
+    <ion-tab [root]="reviewsRoot" [rootParams]="restaurantParams" tabTitle="Avaliações" tabIcon="ios-clipboard"></ion-tab>
+</ion-tabs>
