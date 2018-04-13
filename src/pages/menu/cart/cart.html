@@ -11,8 +11,9 @@
 <ion-content padding>
 
     <!--CARRINHO VAZIO-->
-        <ion-img *ngIf="total == 0" class="img" src="/assets/imgs/404.png" ></ion-img>
-
+    <span *ngIf="total == 0">
+        <ion-img class="img" src="assets/imgs/404.png" ></ion-img>
+    </span>
 
     <!--CARRINHO COM ITEMS-->
     <span *ngIf="total > 0">

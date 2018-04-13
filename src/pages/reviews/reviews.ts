@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, IonicPage, LoadingController } from 'ionic-angular';
+import { NavParams, IonicPage } from 'ionic-angular';
 import { RestaurantService } from '../../services/restaurant/restaurant.service';
 import { NotificationService } from '../../services/notification.service';
 

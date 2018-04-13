@@ -3,7 +3,6 @@ import { Platform } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
-import { RestaurantsPage } from '../pages/restaurants/restaurants';
 import { HomePage } from '../pages/home/home';
 
 
@@ -21,7 +20,7 @@ export class MyApp {
 
             storage.get('token').then((data) => { //se o usuário estiver logado, lista de restaurante será a homepage
                 if(data){
-                this.rootPage = RestaurantsPage;
+                this.rootPage = 'RestaurantsPage';
             }else{
                 this.rootPage = HomePage;
             }
