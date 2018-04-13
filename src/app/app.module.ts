@@ -6,40 +6,28 @@ import { IonicStorageModule } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
-import { AuthProvider } from '../providers/auth/auth';
-import { CartPage } from '../pages/cart/cart'
-import { CartService } from '../providers/cart/cart.service';
-import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
-import { MenuPage } from '../pages/menu/menu';
+
 import { MyApp } from './app.component';
-import { OrderPage } from '../pages/order/order';
-import { OrderSummaryPage } from '../pages/order-summary/order-summary';
-import { NotificationProvider } from '../providers/notification/notification';
-import { RestaurantDetailPage } from '../pages/restaurant-detail/restaurant-detail';
-import { RestaurantsPage } from '../pages/restaurants/restaurants';
-import { RestaurantService } from '../providers/restaurant/restaurants.service';
-import { ReviewsPage } from '../pages/reviews/reviews';
-import { SignupPage } from '../pages/signup/signup';
+import { HomePage } from '../pages/home/home';
+
+import { CartService } from '../services/cart/cart.service';
+import { NotificationService } from '../services/notification.service';
+import { RestaurantService } from '../services/restaurant/restaurant.service';
+import { TokentService } from '../services/token';
+import { AuthService } from '../services/auth.service';
+
+import { CONFIG_FIREBASE } from '../config';
+import firebase from 'firebase';   //firebase storage
 import { TabsPage } from '../pages/tabs/tabs';
-import { WelcomePage } from '../pages/welcome/welcome';
+firebase.initializeApp(CONFIG_FIREBASE.fire);
 
 
 @NgModule({
     declarations: [
-        CartPage,
         HomePage,
-        LoginPage,
-        MenuPage,
         MyApp,
-        OrderPage,
-        OrderSummaryPage,
-        RestaurantDetailPage,
-        RestaurantsPage,
-        ReviewsPage,
-        SignupPage,
-        TabsPage,
-        WelcomePage,
+        TabsPage
+
     ],
     imports: [
         BrowserModule,
@@ -55,29 +43,19 @@ import { WelcomePage } from '../pages/welcome/welcome';
     ],
     bootstrap: [IonicApp],
     entryComponents: [
-        CartPage,
         HomePage,
-        LoginPage,
-        MenuPage,
         MyApp,
-        OrderPage,
-        OrderSummaryPage,
-        RestaurantDetailPage,
-        RestaurantsPage,
-        ReviewsPage,
-        SignupPage,
-        TabsPage,
-        WelcomePage,
+        TabsPage
     ],
     providers: [
-        NotificationProvider,
-        AuthProvider,
+        NotificationService,
         CartService,
         RestaurantService,
         SplashScreen,
         StatusBar,
+        TokentService,
         {provide:  ErrorHandler, useClass: IonicErrorHandler},
-
+        AuthService,
     ]
 })
 export class AppModule {}

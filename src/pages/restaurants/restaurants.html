@@ -6,7 +6,7 @@
             <button ion-button icon-only end (click)="pushLogin()" *ngIf="!userLogged">
                 <ion-icon name="ios-log-in-outline"></ion-icon>
             </button>
-            
+
             <button ion-button icon-only end (click)="logout()" *ngIf="userLogged">
                 <ion-icon name="ios-log-out-outline"></ion-icon>
             </button>
@@ -16,17 +16,17 @@
 </ion-header>
 
 
-<ion-content padding>
-
-    <ion-list *ngFor="let restaurant of restaurants" (click)="restaurantDetail(restaurant.id, restaurant.name)">
-        <ion-item>
-            <ion-thumbnail item-start>
-                <img [src]="restaurant.imagePath">
-            </ion-thumbnail>
-            <h2> {{ restaurant.name }}</h2>
-            <p>{{ restaurant.category }}</p>
-            <button ion-button clear item-end>Ver</button>
-        </ion-item>
-    </ion-list>
-
+<ion-content padding >
+    <span>
+        <ion-list *ngFor="let restaurant of restaurants" (click)="restaurantDetail(restaurant.id, restaurant.name)">
+            <ion-item>
+                <ion-thumbnail item-start>
+                    <img [src]="restaurant.imagePath">
+                </ion-thumbnail>
+                <h2> {{ restaurant.name }}</h2>
+                <p>{{ restaurant.category }}</p>
+                <button ion-button clear item-end>Ver</button>
+            </ion-item>
+        </ion-list>
+    </span>
 </ion-content>

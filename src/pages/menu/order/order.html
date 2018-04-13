@@ -1,0 +1,54 @@
+<ion-header>
+
+    <ion-navbar color="danger">
+        <ion-title text-left>Pedido #3541</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="title-dados" padding>
+        <p>Seus Dados</p>
+    </div>
+    <form  [formGroup] = "formOrder">
+
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Endereço</ion-label>
+                <ion-input type="text" formControlName="address"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Número</ion-label>
+                <ion-input type="number" formControlName="number"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Complemento</ion-label>
+                <ion-input type="text" formControlName="optionalAddress"></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <div class="title-pag">
+            <p>Forma de pagamento</p>
+
+            <ion-list radio-group formControlName="paymentOption">
+                <ion-item>
+                    <ion-label>Cartão de crédito</ion-label>
+                    <ion-radio color="vdanger" value="cc"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Cartão de débito</ion-label>
+                    <ion-radio color="vdanger" value="cd"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Vale alimetação</ion-label>
+                    <ion-radio color="vdanger" value="va"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </div>
+
+    </form>
+
+    <div class="title-total" padding><p>Total: {{ total | currency: 'BRL': true}}</p></div>
+    <br><button ion-button round outline icon-only color="danger" block (click)="createOrder()">Finalizar pedido</button>
+</ion-content>

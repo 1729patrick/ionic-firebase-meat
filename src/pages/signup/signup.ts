@@ -1,11 +1,11 @@
-import { AuthProvider } from '../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, IonicPage } from 'ionic-angular';
-import { NotificationProvider } from '../../providers/notification/notification';
+import { NavController, IonicPage } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RestaurantsPage } from '../restaurants/restaurants';
-import { WelcomePage } from '../welcome/welcome';
-
+import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
+import { RestaurantService } from '../../services/restaurant/restaurant.service';
+import { HomePage } from '../home/home';
+import { TokentService } from '../../services/token';
 
 @IonicPage()
 @Component({
@@ -15,62 +15,60 @@ import { WelcomePage } from '../welcome/welcome';
 export class SignupPage {
     signUpForm: FormGroup;
     users: any;
+    signupError: string;
 
     constructor(
-        public authProvider: AuthProvider,
         public navCtrl: NavController,
-        public navParams: NavParams,
-        public notificationProvider: NotificationProvider,
+        public notificationService: NotificationService,
         public formBuilder: FormBuilder,
-        public alertCtrl: AlertController) {
+        private auth: AuthService,
+        public restaurantService: RestaurantService,
+        public tokentService: TokentService) {
 
             //VALIDACAO DOS CAMPOS DE NOVA CONTA
             this.signUpForm = this.formBuilder.group({
             name: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
             email: this.formBuilder.control('', [Validators.required, Validators.email]),
-            password: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-            confirmPassword: this.formBuilder.control('', [Validators.required, Validators.minLength(3)])
+            password: this.formBuilder.control('', [Validators.required, Validators.minLength(6)]),
+            confirmPassword: this.formBuilder.control('', [Validators.required, Validators.minLength(6)])
         })
     }
 
     pushHome(): void {
-        this.navCtrl.setRoot(WelcomePage);
-
+        this.navCtrl.setRoot(HomePage);
     }
 
-    signUp(): void {
+    signUp() {
+
         if(this.signUpForm.valid) {
-            if(this.signUpForm.value.password == this.signUpForm.value.confirmPassword){
-                let user;
-                let email = this.signUpForm.value.email;
+            let data = this.signUpForm.value;
 
-                this.authProvider.getUsers()
-                .subscribe(data => {
-                    this.users = data;
+            if(data.password == data.confirmPassword){
 
-                    user =  this.users.filter(function (user) {
-                        return user.email.toLowerCase() === email.toLowerCase() ;
-                    });
+                this.restaurantService.createUser(data);
+                let credentials = {
+                    email: data.email,
+                    password: data.password
+                };
 
-                    if (!user.length){
-                        this.authProvider.saveToken(this.signUpForm.value); //para salvar a senha no storage
-                        this.notificationProvider.messageDefault(`Olá ${this.signUpForm.value.name}, bem-vindo.`); //mensagem de boas vindas
-                        this.authProvider.createAccount(this.signUpForm.value);//para salvar os dados no db
 
-                        this.navCtrl.setRoot(RestaurantsPage);
-                    }else{
-                        this.notificationProvider.messageDefault(`Email já cadastrado.`);
+                this.auth.signUp(credentials).then(
+                    () =>{
+                        this.notificationService.messageDefault(`Olá ${data.name}, bem-vindo.`);
+                        this.navCtrl.setRoot('RestaurantsPage');
+                        this.tokentService.saveToken(credentials)
+
+                    },
+                    error =>  {
+                        this.notificationService.messageDefault(`Email já cadastrado.`);
                     }
-                })
-
+                );
             }else{
-                this.notificationProvider.messageDefault(`Senhas não coincidem.`);//mensagem de senhas diferentes
+                this.notificationService.messageDefault(`Senhas não coincidem.`);//mensagem de senhas diferentes
             }
-
         }else {
-            this.notificationProvider.messageDefault(`Dados inválidos.`);//mensagem de dados inválidos
+            this.notificationService.messageDefault(`Dados inválidos.`);//mensagem de dados inválidos
         }
-
     }
 
 }

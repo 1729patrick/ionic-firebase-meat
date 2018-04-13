@@ -7,8 +7,20 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-    
+
     constructor(
         public navCtrl: NavController) { }
+
+        pushRestaurants(): void {
+            this.navCtrl.setRoot('RestaurantsPage');
+        }
+
+        pushLogin():void {
+            this.navCtrl.setRoot('LoginPage');
+        }
+
+        pushSignUp():void {
+            this.navCtrl.setRoot('SignupPage');
+        }
 
     }

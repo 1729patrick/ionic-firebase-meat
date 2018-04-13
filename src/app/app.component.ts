@@ -3,8 +3,8 @@ import { Platform } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
-import { WelcomePage } from '../pages/welcome/welcome';
 import { RestaurantsPage } from '../pages/restaurants/restaurants';
+import { HomePage } from '../pages/home/home';
 
 
 @Component({
@@ -18,19 +18,22 @@ export class MyApp {
         splashScreen: SplashScreen,
         statusBar: StatusBar,
         storage: Storage) {
-            
-            //COR DA NAVBAR DO ANDROID
-            platform.ready().then(() => {
-            statusBar.backgroundColorByHexString("#f53d3d");
-
 
             storage.get('token').then((data) => { //se o usuário estiver logado, lista de restaurante será a homepage
                 if(data){
                 this.rootPage = RestaurantsPage;
             }else{
-                this.rootPage = WelcomePage;
+                this.rootPage = HomePage;
             }
+            console.log('Token: ' + data)
         });
+
+
+        //COR DA NAVBAR DO ANDROID
+        platform.ready().then(() => {
+        statusBar.backgroundColorByHexString("#f53d3d");
     });
+
 }
+
 }

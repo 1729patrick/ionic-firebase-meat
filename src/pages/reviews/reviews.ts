@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController, IonicPage } from 'ionic-angular';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { RestaurantService } from '../../providers/restaurant/restaurants.service';
-
+import { NavParams, IonicPage, LoadingController } from 'ionic-angular';
+import { RestaurantService } from '../../services/restaurant/restaurant.service';
+import { NotificationService } from '../../services/notification.service';
 
 @IonicPage()
 @Component({
@@ -19,25 +18,25 @@ export class ReviewsPage {
 
 
     constructor(
-        public navCtrl: NavController,
         public navParams: NavParams,
-        public notificationProvider: NotificationProvider,
-        public restaurantService: RestaurantService,
-        public alertCtrl: AlertController,
-        public toastCtrl: ToastController) {
+        public notificationService: NotificationService,
+        public restaurantService: RestaurantService) {
             this.id = this.navParams.data.id;
 
-            this.restaurantService.restaurantReviews(this.id)
-            .subscribe(reviews => {
-                this.reviews = reviews;
-            });
+            this.restaurantService.getReviews(this.id).then(data => {
+                this.reviews = data;
+            })
+
+            this.notificationService.loading();
         }
 
         showReview(i) {
-            this.notificationProvider.showReview(this.reviews[i]);
+            this.notificationService.showReview(this.reviews[i]);
         }
 
         newReview() {
-            this.notificationProvider.newReview(this.id);
+            this.notificationService.newReview(this.id);
         }
+
+
     }

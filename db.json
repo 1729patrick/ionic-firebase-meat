@@ -102,7 +102,7 @@
       "restaurantId": "burger-house"
     },
     {
-      "id": "coke.png",
+      "id": "coke",
       "imagePath": "assets/imgs/foods/coke.png",
       "name": "Refrigerante",
       "description": "O refri mais gelado da cidade.",
@@ -390,6 +390,13 @@
       "rating": 4.5,
       "comments": "Taxa de entrega bastante elevada e precisa colocar no app se a pessoa quer porção adicional de algo (calda, crocante etc)",
       "restaurantId": "tasty-treats"
+    },
+    {
+      "rating": "1",
+      "name": "a",
+      "comments": "s",
+      "restaurantId": "bread-bakery",
+      "id": 24
     }
   ],
   "orders": [
@@ -402,7 +409,7 @@
       },
       [
         {
-          "id": "icestd.png",
+          "id": "icestd",
           "imagePath": "assets/imgs/foods/icestd.png",
           "name": "Sorvete Simples",
           "description": "Clássico sorvete de rua onde todos os sabores são idênticos.",

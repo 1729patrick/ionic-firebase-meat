@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.ionic.meat" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Meat</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="patrick@flexpro.com.br" href="http://flexpro.com.br/">FlexPro Sistemas</author>
-    <content src="index.html" />
+    <content href="http://192.168.104.68:8100" src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -84,5 +84,6 @@
     <allow-navigation href="http://192.168.104.68:8101" />
     <allow-navigation href="http://192.168.104.68:8100" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
+    <plugin name="cordova-plugin-firebase" spec="^0.1.25" />
     <engine name="android" spec="7.0.0" />
 </widget>

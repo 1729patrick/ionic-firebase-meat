@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "690662668841",
+    "firebase_url": "https://meat-app-c02df.firebaseio.com",
+    "project_id": "meat-app-c02df",
+    "storage_bucket": "meat-app-c02df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690662668841:android:312e90c33db204ae",
+        "android_client_info": {
+          "package_name": "io.ionic.meat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690662668841-hi6pp5c0juuphm3f2354pedmhlpqm451.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWEd92sQa4q7j-CvW7_shII3hUB_0rlts"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

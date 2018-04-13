@@ -1,12 +1,17 @@
-<ion-header>
-
-    <ion-navbar color="danger">
-        <ion-title>
-            Meat - Ionic
-        </ion-title>
-    </ion-navbar>
-</ion-header>
-
 <ion-content padding>
-    
+
+    <div id="welcome">
+        <h1>Bem-vindo ao Meat!</h1>
+        <p>Está com fome? Peça e receba em casa.</p>
+    </div>
+
+    <div class="btnRestaurants">
+        <button ion-button color="danger" round (click)="pushRestaurants()">Ver restaurantes</button>
+    </div>
+
+    <div class="btnLogin" padding >
+        <button ion-button color="danger" round outline block (click)="pushLogin()">Login</button> <br>
+        <button ion-button color="danger" round outline block (click)="pushSignUp()">Create Account</button>
+    </div>
+
 </ion-content>

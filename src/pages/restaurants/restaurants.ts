@@ -1,13 +1,11 @@
-import { AuthProvider } from '../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController,IonicPage, AlertController } from 'ionic-angular';
-import { NotificationProvider } from '../../providers/notification/notification';
-import { LoginPage } from '../login/login';
-import { Restaurant } from'../../providers/restaurant/restaurant.model';
-import { RestaurantService } from '../../providers/restaurant/restaurants.service';
+import { NavController,IonicPage, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { RestaurantService } from '../../services/restaurant/restaurant.service';
+import { NotificationService } from '../../services/notification.service';
+import { AuthService } from '../../services/auth.service';
 import { TabsPage } from '../tabs/tabs';
-import { WelcomePage } from '../welcome/welcome';
+import { HomePage } from '../home/home';
 
 
 @IonicPage()
@@ -16,35 +14,42 @@ import { WelcomePage } from '../welcome/welcome';
     templateUrl: 'restaurants.html',
 })
 export class RestaurantsPage {
-    restaurants: Restaurant[]; //variavel restaurants do tipo Restaurant de restaurant.model
+    restaurants: any; //variavel restaurants do tipo Restaurant de restaurant.model
     userLogged: boolean;
 
     constructor(
-        public authProvider: AuthProvider,
         public alertCtrl: AlertController,
         public navCtrl: NavController,
-        public navParams: NavParams,
-        public notificationProvider: NotificationProvider,
-        public restaurantService: RestaurantService,
+        public notificationService: NotificationService,
         public storage: Storage,
-        public toastCtrl: ToastController) {
+        public restaurantService: RestaurantService,
+        public authService: AuthService) {
 
-            this.restaurantService.showRestaurants()
-            .subscribe(restaurants => {
-                this.restaurants = restaurants; //para pegar os valor do arquivo json e salvar na variavel restaurants
-            },
-            error => {
-                console.log(error);
-            });
-
-            storage.get('token').then((data) => { //se o usuário estiver logado, lista de restaurante será a homepage
-                if(data) {
-                    this.userLogged =  true;
+            this.restaurantService.getRestaurants("restaurants").then((data) => {
+                if(data.length === 0){
+                    this.notificationService.messageDefault(`Sem conexão com internet.`);
                 }else {
-                    this.userLogged =  false;
+                    this.restaurants = data;
                 }
-            });
+            })
+
+            this.notificationService.loading();
+
+            this.verifyToken();
+
+        }
+
+        verifyToken(){
+            this.storage.get('token').then((data) => { //se o usuário estiver logado, lista de restaurante será a homepage
+                if(data) {
+                this.userLogged =  true;
+            }else {
+                this.userLogged =  false;
+            }
+            console.log('Token: ' + data);
+        });
     }
+
 
     restaurantDetail(id, name): void {
         this.navCtrl.push(TabsPage, { //passa o id e o nome do restaurant do restaurante selecionado por parametro para a tab
@@ -53,27 +58,30 @@ export class RestaurantsPage {
         });
     }
 
+
     pushLogin(): void {
-        this.navCtrl.setRoot(LoginPage)
+        this.navCtrl.setRoot('LoginPage')
     }
+
 
     logout(): void {
         //this.notificationProvider.confirmExit();
-        let alert = this.alertCtrl.create({
-        title: 'Logout',
-        message: 'Tem certeza que quer sair?',
-        buttons: [
-            {
-                text: 'Sair',
-                handler: () => {
-                    this.authProvider.logout();
-                    this.navCtrl.setRoot(WelcomePage);
+        let alert = this.alertCtrl
+        .create({
+            title: 'Logout',
+            message: 'Tem certeza que quer sair?',
+            buttons: [
+                {
+                    text: 'Sair',
+                    handler: () => {
+                        this.authService.signOut();
+                        this.navCtrl.setRoot(HomePage);
+                    }
                 }
-            }
-        ]
-    });
-    alert.present();
-    alert.setMode("ios");
-}
+            ]
+        });
+        alert.present();
+        alert.setMode("ios");
+    }
 
 }

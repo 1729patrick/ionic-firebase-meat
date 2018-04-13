@@ -6,18 +6,18 @@
 
 
 <ion-content>
+    <span *ngIf="time">
+        <ion-card>
+            <ion-thumbnail item-start>
+                <img [src]="restaurant?.imagePath">
+            </ion-thumbnail>
 
-    <ion-card>
-        <ion-thumbnail item-start>
-            <img [src]="restaurant?.imagePath">
-        </ion-thumbnail>
-
-        <ion-card-content>
-            <p><strong>Categoria:</strong> {{ restaurant?.category }}</p>
-            <p><strong>Quem somos:</strong> {{ restaurant?.about }}</p>
-            <p><strong>Horários:</strong> {{ restaurant?.hours }}</p>
-            <p><strong>Tempo de entrega:</strong> {{ restaurant?.deliveryEstimate }}</p>
-        </ion-card-content>
-    </ion-card>
-
+            <ion-card-content>
+                <p><strong>Categoria:</strong> {{ restaurant?.category }}</p>
+                <p><strong>Quem somos:</strong> {{ restaurant?.about }}</p>
+                <p><strong>Horários:</strong> {{ restaurant?.hours }}</p>
+                <p><strong>Tempo de entrega:</strong> {{ restaurant?.deliveryEstimate }}</p>
+            </ion-card-content>
+        </ion-card>
+    </span>
 </ion-content>

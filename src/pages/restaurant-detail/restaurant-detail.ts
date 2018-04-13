@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage } from 'ionic-angular';
-import { RestaurantService } from '../../providers/restaurant/restaurants.service';
-import { Restaurant } from'../../providers/restaurant/restaurant.model';
+import { NavParams, IonicPage } from 'ionic-angular';
+import { Restaurant } from'../../services/restaurant/restaurant.model';
+import { RestaurantService } from '../../services/restaurant/restaurant.service';
+import { NotificationService } from '../../services/notification.service';
+
 
 @IonicPage()
 @Component({
@@ -10,18 +12,27 @@ import { Restaurant } from'../../providers/restaurant/restaurant.model';
 })
 export class RestaurantDetailPage {
     restaurant: Restaurant;
+    time: boolean = false;
 
     constructor(
-        public navCtrl: NavController,
         public navParams: NavParams,
-        public restaurantService: RestaurantService) {
+        public RestaurantService: RestaurantService,
+        public notificationService: NotificationService) {
 
             let id = this.navParams.data.id; //pega o id do restaurante por parametro passado pela tab
 
-            this.restaurantService.restaurantById(id)
-            .subscribe(restaurant => {
-                this.restaurant = restaurant;
+            this.RestaurantService.getRestaurant(id).then((data) => {
+                this.restaurant = data;
             })
+        }
+
+        ionViewCanEnter(){
+
+            this.notificationService.loading();
+
+            setTimeout(() => {
+                this.time = true
+            }, 600);
         }
 
     }
