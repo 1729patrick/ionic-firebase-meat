@@ -20,7 +20,7 @@ export class OrderPage {
         public notificationService: NotificationService,
         public navParams: NavParams) {
 
-            this.total = this.cartService.getTotal();
+            this.total = this.cartService.total;
 
             this.formOrder = this.formBuilder.group({
                 address:  this.formBuilder.control('', [Validators.required, Validators.minLength(7)]),

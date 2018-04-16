@@ -14,6 +14,10 @@ import { HomePage } from '../home/home';
 export class LoginPage {
     loginForm: FormGroup;
 
+    passwordType: string = 'password';
+    passwordIcon: string = 'eye-off';
+    passwordIconColor: string = 'grey';
+
     constructor(
         private auth: AuthService,
         public formBuilder: FormBuilder,
@@ -21,7 +25,7 @@ export class LoginPage {
         public navParams: NavParams,
         public NotificationService: NotificationService,
         public toastCtrl: ToastController,
-    	private token: TokentService) {
+        private token: TokentService) {
 
             this.loginForm = this.formBuilder.group({    //VALIDACAO DOS CAMPOS DE LOGIN
                 email: this.formBuilder.control('', [Validators.required, Validators.email]),
@@ -72,5 +76,9 @@ export class LoginPage {
 
         }
 
-
+        hideShowPassword() {
+            this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+            this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+            this.passwordIconColor = this.passwordIconColor === 'grey' ? 'dark' : 'grey';
+        }
     }

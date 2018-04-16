@@ -19,16 +19,13 @@ export class CartPage {
         public notificationService: NotificationService,
         public loadingCtrl: LoadingController) {
 
-            this.total = this.cartService.getTotal();
             this.items = this.cartService.item;
-
-
         }
 
         deleteItem(id):void {
             this.notificationService.messageDefault(`${this.items[id].name} removido do carrinho.`);
             this.cartService.deleteItem(id);
-            this.total = this.cartService.getTotal();
+
         }
 
         newOrder() {

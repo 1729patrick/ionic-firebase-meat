@@ -3,7 +3,7 @@
     <name>Meat</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="patrick@flexpro.com.br" href="http://flexpro.com.br/">FlexPro Sistemas</author>
-    <content href="http://192.168.104.68:8100" src="index.html" />
+    <content href="http://192.168.104.68:8100" original-src="index.html" src="http://192.168.104.68:8101" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

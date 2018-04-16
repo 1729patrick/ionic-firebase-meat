@@ -20,11 +20,13 @@
             <ion-label floating>Email</ion-label>
             <ion-input type="text" formControlName="email"></ion-input>
         </ion-item>
+
         <ion-item>
             <ion-label floating>Password</ion-label>
-            <ion-input type="password" formControlName="password"></ion-input>
-            <!-- <ion-input [type]="passwordType" formControlName="password"></ion-input>
-            <ion-icon [name]="passwordIcon" item-right (click)="hideShowPassword()"></ion-icon> -->
+            <ion-input formControlName="password" [type]="passwordType" clearOnEdit="false"></ion-input>
+            <button ion-button icon-only item-end clear (click)="hideShowPassword()">
+                <ion-icon item-end name="eye" [color]="passwordIconColor"></ion-icon>
+            </button>
         </ion-item>
     </form>
 

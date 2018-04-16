@@ -24,7 +24,7 @@ export class MyApp {
             }else{
                 this.rootPage = HomePage;
             }
-            console.log('Token: ' + data)
+            //console.log('Token: ' + data)
         });
 
 
